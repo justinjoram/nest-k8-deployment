@@ -14,6 +14,6 @@ jobs:
         with:
           node-version: '23'
       - name: install dependencies
-        run: npm ci
+        run: pnpm ci
       - name: build
-        run: npm run build
+        run: pnpm run build
