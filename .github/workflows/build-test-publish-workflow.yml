@@ -37,7 +37,8 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/nest-app:v1.0.0
+          platforms: linux/amd64,linux/arm64
+          tags: ${{ secrets.DOCKER_USERNAME }}/nest-app:v1.0.1
           labels: |
             org.opencontainers.image.title=NestJS K8s Demo App
             org.opencontainers.image.description=A NestJS application
