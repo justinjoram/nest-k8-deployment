@@ -1,0 +1,19 @@
+name: build-test-publish-workflow.yml
+on: [workflow_dispatch]
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: repository checkout
+        uses: actions/checkout@v3
+        with:
+          ref: main
+      - name: node setup
+        uses: actions/setup-node@v3
+        with:
+          node-version: '23'
+      - name: install dependencies
+        run: npm ci
+      - name: build
+        run: npm run build
