@@ -1,0 +1,11 @@
+name: build-test-deploy-workflow.yml
+on: [workflow_dispatch]
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: repository checkout
+        uses: actions/checkout@v3
+        with:
+          ref: main
