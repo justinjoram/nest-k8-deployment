@@ -26,3 +26,24 @@ jobs:
         run: pnpm run test
       - name: set up docker buildx
         uses: docker/setup-buildx-action@v3
+      - name: login to docker hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+      - name: build and push docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/nest-app:v1.0.0
+          labels: |
+            org.opencontainers.image.title=NestJS K8s Demo App
+            org.opencontainers.image.description=A NestJS application
+            org.opencontainers.image.url=https://github.com/justinjoram/nest-k8-deployment
+            org.opencontainers.image.source=https://github.com/justinjoram/nest-k8-deployment
+            org.opencontainers.image.documentation=https://docs.nestjs.com/
+            org.opencontainers.image.vendor=Synchronous Software
+            org.opencontainers.image.licenses=MIT
+            org.opencontainers.image.created=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
